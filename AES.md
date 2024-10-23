@@ -86,7 +86,7 @@ In this example:
 - The plaintext `"Hello, World!"` is padded, encrypted, and the ciphertext is printed in hexadecimal form.
 - The decryption process successfully retrieves the original message.
   
-## Python Code:
+## Python Code :
 ``` python
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
