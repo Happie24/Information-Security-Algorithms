@@ -86,6 +86,8 @@ Suppose the user enters:
 
 5. Decryption reverses the process, recovering the original message "HELLO".
 
+
+## Python Code:
 ``` python
 import numpy as np
 
