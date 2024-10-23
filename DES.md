@@ -94,7 +94,7 @@ Decrypted data: HelloDES
 - **Encryption**: The plaintext is encrypted using the generated DES key and a random IV, producing the encrypted output in hexadecimal format.
 - **Decryption**: The ciphertext is decrypted using the same key and IV, and the original message is successfully recovered.
 
-## Python Code:
+## Python Code :
 ``` python
 from Crypto.Cipher import DES
 from Crypto.Util.Padding import pad, unpad
