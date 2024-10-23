@@ -74,7 +74,8 @@ Assume:
 
 Both Alice and Bob compute the same shared secret (`2`), which they can use as a key for further secure communication.
 
-## Python Code:
+## Python Code :
+
 ``` python
 import random
 
