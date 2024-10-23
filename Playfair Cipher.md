@@ -66,6 +66,8 @@ The encrypted message might be something like "KC SY SV".
 
 Decrypting "KC SY SV" will return "HELLO".
 
+## Python Code:
+
 ``` python
 def generate_key_matrix(key):
     key = key.upper().replace("J", "I")
