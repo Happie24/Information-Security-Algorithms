@@ -1,0 +1,82 @@
+Explanation:
+Typical English Letter Frequencies: We start by defining a dictionary with the typical frequencies of each letter in English. This helps us map the most frequent letters in the ciphertext to the most frequent letters in English.
+
+Calculate Frequencies: The calculate_frequencies function filters out non-alphabetic characters, converts everything to uppercase, and calculates the frequency of each letter in the ciphertext.
+
+Map Frequencies: The map_frequencies function sorts the frequencies of the letters in the ciphertext and the typical English frequencies, then creates a mapping based on these sorted frequencies.
+
+Decode Ciphertext: The decode_ciphertext function uses the mapping to replace each letter in the ciphertext with its corresponding plaintext letter.
+
+Main Function: The main function handles user input, calls the necessary functions to calculate frequencies, map them, and decode the ciphertext, and then prints the results.
+
+This approach works well for simple substitution ciphers where the frequency of letters can give a good approximation of the plaintext. However, for more complex ciphers, additional methods and analysis might be needed.
+  
+## Python Code :
+``` python
+from collections import Counter
+
+# Typical English letter frequencies
+english_frequencies = {
+    'E': 12.02, 'T': 9.10, 'A': 8.12, 'O': 7.68, 'I': 7.31,
+    'N': 6.95, 'S': 6.28, 'R': 6.02, 'H': 5.92, 'D': 4.32,
+    'L': 3.98, 'U': 2.88, 'C': 2.71, 'M': 2.61, 'F': 2.30,
+    'Y': 2.11, 'W': 2.09, 'G': 2.03, 'P': 1.82, 'B': 1.49,
+    'V': 1.11, 'K': 0.69, 'X': 0.17, 'Q': 0.11, 'J': 0.10,
+    'Z': 0.07
+}
+
+# Function to calculate letter frequencies in a given text
+def calculate_frequencies(text):
+    # Filter only alphabetic characters and convert to uppercase
+    filtered_text = ''.join(filter(str.isalpha, text)).upper()
+    total_letters = len(filtered_text)
+    
+    # Count the frequency of each letter
+    letter_counts = Counter(filtered_text)
+    
+    # Calculate frequency percentage for each letter
+    letter_frequencies = {letter: (count / total_letters) * 100 for letter, count in letter_counts.items()}
+    
+    return letter_frequencies
+
+# Function to map ciphertext frequencies to English frequencies
+def map_frequencies(ciphertext_frequencies, english_frequencies):
+    # Sort both frequencies
+    sorted_ciphertext = sorted(ciphertext_frequencies.items(), key=lambda item: item[1], reverse=True)
+    sorted_english = sorted(english_frequencies.items(), key=lambda item: item[1], reverse=True)
+    
+    # Create the mapping
+    mapping = {ciphertext[0]: english[0] for ciphertext, english in zip(sorted_ciphertext, sorted_english)}
+    
+    return mapping
+
+# Function to decode the ciphertext using the frequency mapping
+def decode_ciphertext(ciphertext, mapping):
+    decoded_text = ''.join([mapping.get(char.upper(), char) for char in ciphertext])
+    return decoded_text
+
+# Main function
+def main():
+    # Take ciphertext input from the user
+    ciphertext = input("Enter the ciphertext: ")
+    
+    # Calculate the frequency of each letter in the ciphertext
+    ciphertext_frequencies = calculate_frequencies(ciphertext)
+    
+    # Map the ciphertext frequencies to typical English letter frequencies
+    frequency_mapping = map_frequencies(ciphertext_frequencies, english_frequencies)
+    
+    # Decode the ciphertext using the frequency mapping
+    decoded_text = decode_ciphertext(ciphertext, frequency_mapping)
+    
+    # Print the results
+    print("Frequency Mapping (Ciphertext -> Plaintext):")
+    for cipher_letter, plain_letter in frequency_mapping.items():
+        print(f"{cipher_letter} -> {plain_letter}")
+    
+    print("\nDecoded Text:")
+    print(decoded_text)
+
+if __name__ == "__main__":
+    main()
+```
